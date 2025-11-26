@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esimerkkisivu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            padding-bottom: 5rem;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jeren nettisivu</h1>
+    <p>TÃ¤mÃ¤ on esimerkkisivu  koodauksen johdantoon.</p>
+    <button id="nappi1">nappi 1</button>
+    <button id="nappi2">nappi 2</button>
+    <p>Olet painanut nappia</p>
+    <p id="painallukset">0</p>
+    <p>kertaa</p>
+
+    <input id="input1">
+    <button id="nappi3">nappi 3</button>
+    <p id="sana1"></p>
+
+    <p>Kuinka monta kääpiötä oli Lumikki sadussa?</p>
+    <input id="input_vastaus">
+    <button id="nappi4">lähetä vastaus</button>
+    <p id="tulos"></p>
+
+    <h2>Satunnaisluvut</h2>
+    <button id="nappi5">heitä noppaa</button>
+    <p id="luku"></p>
+
+    <button id="nappi6">heitä oikeaa noppaa</button><br/><br/>
+    <img id="noppakuva" src="n1.png" /><br/><br />
+
+    <button id="nappi7">heitä kahta noppaa</button><br/><br/>
+    <img id="noppakuva1" src="n1.png" />
+    <img id="noppakuva2" src="n1.png" />
+    
+</body>
+<script>
+    var laskuri = 0;
+    var sana = "";
+    var vastaus = "";
+    var nopat = ["n1.png", "n2.png", "n3.png", "n4.png", "n5.png", "n6.png", "onnenpotku.png", "miinuskolme.png"];
+
+    document.addEventListener("DOMContentLoaded", function() {    
+        function varinvaihto() {
+            document.getElementsByTagName("body")[0].style.color = "red";
+        }
+        
+        function painallus() {
+            laskuri = laskuri + 134;
+            document.getElementById("painallukset").innerHTML = laskuri;
+        }
+        
+        function inputf() {
+            sana = document.getElementById("input1").value;
+            sana = sana.toUpperCase();
+            document.getElementById("sana1").innerHTML = sana;
+        }
+
+        function tarkistaVastaus() {
+            vastaus = document.getElementById("input_vastaus").value;
+            
+            var tulos = "";
+            
+            if (vastaus.toUpperCase() == "SEITSEMÃ„N" || vastaus == "7") {
+                tulos = "Hienoa, vastasit oikein";
+            } else {
+                tulos = "Olet surkea ihminen, et saanut edes tÃ¤tÃ¤ oikein";
+            }
+
+            document.getElementById("tulos").innerHTML = tulos;
+        }
+
+        function satunnaisluku() {
+            var sl = Math.floor(6 * Math.random()) + 1;
+            document.getElementById("luku").innerHTML = sl;
+        }
+
+        function nopanheitto() {
+            var sl = Math.floor(nopat.length * Math.random());
+            document.getElementById("noppakuva").src = nopat[sl];
+        }
+
+        function nopanheitto2() {
+            var sl1 = Math.floor(nopat.length * Math.random());
+            var sl2 = Math.floor(nopat.length * Math.random());
+            document.getElementById("noppakuva1").src = nopat[sl1];
+            document.getElementById("noppakuva2").src = nopat[sl2];
+        }
+        
+        lisaaToimintoNappiin(varinvaihto, "nappi1");
+        lisaaToimintoNappiin(painallus, "nappi2");
+        lisaaToimintoNappiin(inputf, "nappi3");
+        lisaaToimintoNappiin(tarkistaVastaus, "nappi4");
+        lisaaToimintoNappiin(satunnaisluku, "nappi5");
+        lisaaToimintoNappiin(nopanheitto, "nappi6");
+        lisaaToimintoNappiin(nopanheitto2, "nappi7");
+
+        function lisaaToimintoNappiin(toiminto, nappi){
+            var n = document.getElementById(nappi);
+            n.addEventListener("click", toiminto);
+        }
+    
+    });
+
+</script>
+</html>
